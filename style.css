@@ -1,0 +1,147 @@
+:root{
+  --bg:#0b0f14;
+  --panel:#121824;
+  --panel-2:#0f1520;
+  --text:#e8eef7;
+  --muted:#9fb0c6;
+  --accent:#4fb8ff;
+  --accent-2:#00ffa3;
+  --danger:#ff4d6d;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text)}
+
+.app-header{
+  padding:20px;
+  background:linear-gradient(180deg, #0d1420 0%, #0a0f18 100%);
+  border-bottom:1px solid #1d2636;
+  position:sticky; top:0; z-index:5;
+}
+
+h1{margin:0 0 10px; font-weight:800; letter-spacing:.5px;}
+h3{margin:0 0 10px}
+h4{margin:0 6px 8px}
+
+.meta{
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px;
+}
+.meta input, .meta button{
+  background:var(--panel); color:var(--text); border:1px solid #1c2636; border-radius:10px; padding:10px 12px;
+}
+.meta input:focus{outline:1px solid var(--accent)}
+.meta button{cursor:pointer}
+.meta button:hover{box-shadow:0 0 0 2px #1b283a}
+
+.tabs{display:flex; gap:8px; flex-wrap:wrap}
+.tab-btn{
+  background:var(--panel-2); color:var(--text); border:1px solid #1a2332;
+  padding:10px 14px; border-radius:10px; cursor:pointer;
+}
+.tab-btn.active{background:var(--accent); color:#021018; border-color:transparent; font-weight:700}
+
+main{padding:20px; max-width:1100px; margin:0 auto}
+.tab{display:none}
+.tab.active{display:block}
+
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px}
+.card{
+  background:linear-gradient(180deg, #121827 0%, #0e1522 100%);
+  border:1px solid #1b273a; border-radius:14px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.kpi .big{font-size:42px; font-weight:800}
+.kpi .mini{color:var(--muted); margin-top:4px}
+
+.progress{width:100%; height:10px; background:#0a111b; border-radius:999px; overflow:hidden; border:1px solid #132033}
+.progress .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent-2)); transition:width .4s ease}
+.bigbar{height:16px}
+
+.cups{display:grid; grid-template-columns:repeat(8,1fr); gap:8px; margin-top:8px}
+.cup{
+  background:#0a111b; border:1px solid #18263a; border-radius:8px; height:36px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.cup.active{background:linear-gradient(180deg, #004b74, #007ab6); border-color:#1b85c9}
+.cup span{font-size:12px; color:var(--muted)}
+
+.daily-row{margin:12px 0}
+.workouts label{display:block; margin:6px 0}
+
+.actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+.primary{background:var(--accent); color:#021018; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700}
+.danger{background:transparent; color:var(--danger); border:1px solid var(--danger); padding:10px 14px; border-radius:10px; cursor:pointer}
+.primary:hover{filter:brightness(1.05)} .danger:hover{background:rgba(255,77,109,.1)}
+
+.table{width:100%; border-collapse:collapse; margin-top:10px}
+.table th,.table td{border-bottom:1px solid #1a2536; padding:10px; text-align:right}
+.table tr:hover{background:#0b121f}
+
+.grid{display:grid; gap:14px}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+
+.list{margin:0; padding-inline-start:18px}
+.list li{margin:6px 0}
+
+.weight-controls{display:flex; gap:8px; margin-bottom:10px}
+.weight-controls input, .weight-controls button{
+  background:var(--panel); color:var(--text); border:1px solid #1c2636; border-radius:10px; padding:10px 12px;
+}
+.weight-controls button{cursor:pointer}
+
+.status{color:var(--muted); margin-top:8px}
+
+footer{
+  border-top:1px solid #1b2638; color:var(--muted); font-size:14px; padding:18px; text-align:center; margin-top:20px;
+}
+
+/* ---- עיצוב חדש לכפתורי סימון ---- */
+input[type="checkbox"] {
+  /* מסתירים את ה-checkbox המקורי */
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #0f1724;
+  border: 2px solid #1e2b40;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #4fb8ff;
+  box-shadow: 0 0 5px #4fb8ff66;
+}
+
+input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #4fb8ff, #00ffa3);
+  border-color: transparent;
+  box-shadow: 0 0 8px #00ffa366, 0 0 12px #4fb8ff55;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #021018;
+  font-weight: 700;
+  font-size: 16px;
+  position: absolute;
+  top: 2px;
+  left: 6px;
+}
+
+/* טקסט של התווית לצד ה-checkbox */
+label {
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  transition: color 0.25s ease;
+}
+
+input[type="checkbox"]:checked + label,
+label:hover {
+  color: #4fb8ff;
+}

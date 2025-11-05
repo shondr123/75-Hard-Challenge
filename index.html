@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>75 Hard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>אתגר 75</h1>
+    <div class="meta">
+      <label>תאריך התחלה:
+        <input type="date" id="startDateInput" />
+      </label>
+      <label>משקל פתיחה (ק״ג):
+        <input type="number" id="startWeightInput" placeholder="לדוגמה: 95" step="0.1" />
+      </label>
+      <button id="saveStart">שמור התחלה</button>
+    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="dashboard">דשבורד</button>
+      <button class="tab-btn" data-tab="daily">מעקב יומי</button>
+      <button class="tab-btn" data-tab="nutrition">תפריט פשוט</button>
+      <button class="tab-btn" data-tab="training">אימונים</button>
+      <button class="tab-btn" data-tab="stats">סטטיסטיקות</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="tab active">
+      <div class="cards">
+        <div class="card kpi">
+          <h3>יום נוכחי באתגר</h3>
+          <div class="big" id="currentDay">—</div>
+          <div class="mini" id="daysLeft">נשארו — ימים</div>
+        </div>
+        <div class="card kpi">
+          <h3>אחוז עמידה בכלל החוקים</h3>
+          <div class="progress">
+            <div id="overallProgressBar" class="bar"></div>
+          </div>
+          <div class="mini" id="overallProgressText">—%</div>
+        </div>
+        <div class="card kpi">
+          <h3>השלמות ימים</h3>
+          <div id="daysCompleted">0 / 75</div>
+        </div>
+      </div>
+
+      <div class="motivation card">
+        <h3>הודעת מוטיבציה להיום</h3>
+        <p id="motivationText">הבטחה לעצמך היא החוזה הכי חשוב שיש. תעמוד בה 💪</p>
+      </div>
+
+      <div class="weight card">
+        <h3>מעקב משקל</h3>
+        <div class="weight-controls">
+          <input type="number" id="todayWeight" placeholder="משקל היום (ק״ג)" step="0.1" />
+          <button id="addWeight">הוסף משקל</button>
+        </div>
+        <ul id="weightList" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- DAILY -->
+    <section id="daily" class="tab">
+      <div class="card">
+        <h3>משימות יומיות (חובה להשלים את כולן, אחרת חוזרים ליום 1)</h3>
+
+        <div class="daily-row">
+          <label><input type="checkbox" id="dietCheck" /> דיאטה ללא ארוחות צ׳יט וללא אלכוהול</label>
+        </div>
+
+        <div class="daily-row">
+          <div class="row-title">שתיית 4 ליטרים מים</div>
+          <div id="waterCups" class="cups"></div>
+          <div class="mini">לחיצה על כוס = 500 מ״ל. צריך 8/8.</div>
+        </div>
+
+        <div class="daily-row workouts">
+          <label><input type="checkbox" id="workoutIndoor" /> אימון 45 דק׳ (חדר כושר/בפנים)</label>
+          <label><input type="checkbox" id="workoutOutdoor" /> אימון 45 דק׳ (חובה בחוץ)</label>
+        </div>
+
+        <div class="daily-row">
+          <label><input type="checkbox" id="readCheck" /> קראתי 10 עמודים מספר עיוני (פיזי)</label>
+        </div>
+
+        <div class="daily-row">
+          <label><input type="checkbox" id="photoCheck" /> צילמתי תמונת התקדמות</label>
+          <input type="file" id="photoInput" accept="image/*" />
+          <div class="mini">(אפשר להעלות צילום. נשמר מקומית בדפדפן)</div>
+        </div>
+
+        <div class="actions">
+          <button id="markDayDone" class="primary">סמן יום הושלם ✔️</button>
+          <button id="resetToDay1" class="danger">איפוס לאתגר מחדש (יום 1)</button>
+        </div>
+
+        <div id="dayStatus" class="mini status"></div>
+      </div>
+
+      <div class="card">
+        <h3>יומן ימים</h3>
+        <table class="table">
+          <thead>
+            <tr><th>יום</th><th>תאריך</th><th>מצב</th></tr>
+          </thead>
+          <tbody id="daysTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- NUTRITION -->
+    <section id="nutrition" class="tab">
+      <div class="card">
+        <h3>תפריט פשוט לירידה במשקל</h3>
+        <p class="mini">מותר: חלבון רזה, פחמימות מורכבות, ירקות, מים, קפה שחור. אסור: צ׳יטים, אלכוהול, משקאות ממותקים.</p>
+        <div class="grid two">
+          <div>
+            <h4>בוקר</h4>
+            <ul class="list">
+              <li>חביתה/ביצים + ירקות</li>
+              <li>יוגורט סקייר + מעט אגוזים</li>
+              <li>לחם/טורטיה מחיטה מלאה</li>
+            </ul>
+          </div>
+          <div>
+            <h4>ביניים</h4>
+            <ul class="list">
+              <li>פרי + יוגורט/סקייר</li>
+              <li>חופן אגוזים</li>
+              <li>חטיף חלבון איכותי</li>
+            </ul>
+          </div>
+          <div>
+            <h4>צהריים</h4>
+            <ul class="list">
+              <li>חזה עוף/דג/טונה + אורז מלא/קינואה</li>
+              <li>סלט גדול עם שמן זית ולימון</li>
+            </ul>
+          </div>
+          <div>
+            <h4>ערב</h4>
+            <ul class="list">
+              <li>טונה/גבינת קוטג׳/סקייר + לחם מלא</li>
+              <li>סלט ירקות גדול</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mini">טיפ: שמור כ־2–3 ליטר מים לפני 18:00 כדי לא להעמיס בלילה.</p>
+      </div>
+    </section>
+
+    <!-- TRAINING -->
+    <section id="training" class="tab">
+      <div class="card">
+        <h3>אימוני חדר כושר – פיצול שבועי (דחיפה/משיכה/רגליים)</h3>
+        <div class="grid three">
+          <div>
+            <h4>יום 1 – דחיפה (חזה/כתפיים/יד אחורית)</h4>
+            <ul class="list">
+              <li>לחיצת חזה במכשיר/דאמבלים – 4×10</li>
+              <li>פליי חזה – 3×12</li>
+              <li>לחיצת כתפיים – 4×10</li>
+              <li>הרחקות צידיות – 3×12</li>
+              <li>פוש־דאון/מקבילים – 3×12</li>
+            </ul>
+          </div>
+          <div>
+            <h4>יום 2 – משיכה (גב/יד קדמית)</h4>
+            <ul class="list">
+              <li>משיכת פולי עליון – 4×10</li>
+              <li>חתירה ישיבה – 4×10</li>
+              <li>חתירה בדאמבלים – 3×12</li>
+              <li>כפיפת מרפקים (ברים/דאמבלים) – 3×12</li>
+            </ul>
+          </div>
+          <div>
+            <h4>יום 3 – רגליים</h4>
+            <ul class="list">
+              <li>לחיצת רגליים/סקוואט – 4×10</li>
+              <li>פלאנק (ליבה) – 3×45 שניות</li>
+              <li>פשיטות/כפיפות ברך – 3×12</li>
+              <li>עליות מדרגה/לאנג׳ – 3×12 לכל רגל</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mini">מחזור: יום 4 חזרה ליום 1. שמור 45 דק׳ נטו. מנוחה 60–90 שנ׳ בין סטים.</p>
+      </div>
+
+      <div class="card">
+        <h3>אימון חובה בחוץ – 45 דק׳</h3>
+        <ul class="list">
+          <li>הליכה מהירה 6–7 קמ״ש / ריצה קלה</li>
+          <li>אופניים/קורקינט/טיול מאומץ</li>
+          <li>מד־עומס פשוט: אפשר לדבר במשפטים קצרים = קצב נכון</li>
+        </ul>
+        <p class="mini">גשם/חם? זהו חלק מהאתגר – לבוש מתאים ולצאת בבטחה.</p>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="stats" class="tab">
+      <div class="card">
+        <h3>מדדים</h3>
+        <div class="grid two">
+          <div>
+            <div class="progress bigbar">
+              <div id="completionBar" class="bar"></div>
+            </div>
+            <div class="mini" id="completionText">השלמות: 0%</div>
+          </div>
+          <div>
+            <div class="progress bigbar">
+              <div id="consistencyBar" class="bar"></div>
+            </div>
+            <div class="mini" id="consistencyText">רצף נוכחי: 0 ימים</div>
+          </div>
+        </div>
+        <p class="mini">הערה: אם יום לא סומן כהושלם — לפי כללי האתגר, מתחילים מחדש מיום 1.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    נבנה עבורך באהבה. 🖤 שמירה מתבצעת בדפדפן (localStorage).
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
